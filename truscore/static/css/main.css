@@ -1,0 +1,49 @@
+.header-bar {
+	height: 50px;
+	width: 100%;
+	background-color: grey;
+	text-align: center;
+}
+.section-content {
+	background-color: teal;
+
+
+}
+
+.section-content a{
+	float: left;
+	height: 70px;
+	width: 20%;
+	background-color: green;
+	margin-left: 2%;
+}
+
+
+.field {
+	height:50%;
+	width:100%;
+}
+
+
+#log-in-btn {
+	height: 50px;
+	width: 150px;	
+}
+
+
+.btn {
+	background-color: green;
+	border-radius: 5px;
+
+}
+
+.btn:hover {
+	cursor: pointer;
+	background-color: lime;
+}
+
+.btn:active {
+	background-color: #014421;
+}
+
+
