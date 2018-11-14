@@ -14,3 +14,7 @@ class LoginForm(Form):
   password = PasswordField('Password', validators=[DataRequired("Please enter a password.")])
   submit = SubmitField("Sign in")
 
+class SearchForm(Form):
+  search = StringField('Enter a bar, hotel, or restaurant name', validators=[DataRequired("Please enter a search term.")])
+  submit = SubmitField("Search")
+

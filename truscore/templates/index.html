@@ -8,6 +8,25 @@
         <a href="{{ url_for('login') }}" class="btn-secondary">Log in</a>
         <a href="{{ url_for('about') }}" class="btn-secondary">Learn more</a> 
       </div>
+      <div class="search-section">
+        <form method="POST" action="/search">
+        {{ form.hidden_tag() }}   
+
+        <div class="form-group">
+          {{ form.search.label }}
+
+          {% if form.search.errors %}
+            {% for error in form.password.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+
+          {{ form.search }}
+        </div>
+
+        {{ form.submit(class="btn-primary") }}
+      </form>
+      </div>
 
       <div class="clearfix"></div>
 

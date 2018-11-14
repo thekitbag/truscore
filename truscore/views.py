@@ -1,14 +1,15 @@
 from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User
-from .forms import SignupForm, LoginForm
+from .forms import SignupForm, LoginForm, SearchForm
 
 @app.route("/")
 def index():
+  form = SearchForm()
   if 'email' not in session:
-    return render_template("index.html") 
+    return render_template("index.html", form=form) 
   else: 
-    return redirect(url_for('loggedInHomePage', name=session.get('name')))
+    return redirect(url_for('search', form=form, name=session.get('name')))
 
 @app.route("/about")
 def about():
@@ -17,7 +18,7 @@ def about():
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
   if 'email' in session:
-    return redirect(url_for('loggedInHomePage', name=session.get('name')))
+    return redirect(url_for('search', name=session.get('name')))
 
   form = SignupForm()
 
@@ -31,7 +32,7 @@ def signup():
 
       session['email'] = newuser.email
       session['name'] = newuser.firstname
-      return redirect(url_for('loggedInHomePage', name=session.get('name')))
+      return redirect(url_for('search', name=session.get('name')))
 
   elif request.method == "GET":
     return render_template('signup.html', form=form)
@@ -39,7 +40,7 @@ def signup():
 @app.route("/login", methods=["GET", "POST"])
 def login():
   if 'email' in session:
-    return redirect(url_for('loggedInHomePage', name=session.get('name')))
+    return redirect(url_for('search', name=session.get('name')))
 
   form = LoginForm()
 
@@ -54,7 +55,7 @@ def login():
       if user is not None and user.check_password(password):
         session['email'] = form.email.data
         session['name'] = user.firstname
-        return redirect(url_for('loggedInHomePage', name=session.get('name')))
+        return redirect(url_for('search', name=session.get('name')))
       else:
         return redirect(url_for('login'))
 
@@ -68,11 +69,15 @@ def logout():
   return redirect(url_for('index'))
 
 @app.route("/search", methods=["GET", "POST"])
-def loggedInHomePage():
-  if 'email' in session:
-    return render_template('search.html', name=session.get('name'))
-  else:
-    return redirect(url_for('index'))
+def search():
+  if request.method == "GET":
+    if 'email' in session:
+      return render_template('search.html', name=session.get('name'))
+    else:
+      return redirect(url_for('index'))
+
+  if request.method == "POST":
+    return "These are your results"
 
 
 
