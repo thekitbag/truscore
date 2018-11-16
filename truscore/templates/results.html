@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>These are your results</h3>
+
+<div id="search-results">
+{% for result in searchResults %}
+	<div class="result" id="itemid{{result['uuid']}}">
+			<div class="entry"> {{result['name']}}</div>
+			<div class="score"> Truscore: {{result['score']}}</div>			 
+			<div class="btn more-info" id="more-info-{{result['uuid']}}">More info</div>
+			<div class="btn rate" id="rate-{{result['uuid']}}">Rate</div>		
+	</div>	
+{% endfor %}
+
+<script src="../static/js/search.js?v=3"></script>
+{% endblock %}
+

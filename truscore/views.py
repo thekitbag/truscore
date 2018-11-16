@@ -2,6 +2,7 @@ from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User
 from .forms import SignupForm, LoginForm, SearchForm
+from. search import Test
 
 @app.route("/")
 def index():
@@ -72,12 +73,25 @@ def logout():
 def search():
   if request.method == "GET":
     if 'email' in session:
-      return render_template('search.html', name=session.get('name'))
+      results = Test.getResults()
+      return render_template('search.html', name=session.get('name'), searchResults=results)
     else:
       return redirect(url_for('index'))
 
   if request.method == "POST":
-    return "These are your results"
+    results = Test.getResults()
+    return redirect(url_for('searchResults', searchResults=results))
+
+@app.route("/searchResults")
+def searchResults():
+  results = Test.getResults()
+  return render_template('results.html', searchResults=results)
+
+@app.route("/getMoreInfo", methods=["GET", "POST"])
+def getMoreInfo():
+  return "This is all yo extra info"
+
+
 
 
 
