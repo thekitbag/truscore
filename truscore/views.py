@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User
 from .forms import SignupForm, LoginForm, SearchForm
-from. search import Test
+from .search import Test
 
 @app.route("/")
 def index():
@@ -89,7 +89,8 @@ def searchResults():
 
 @app.route("/getMoreInfo", methods=["GET", "POST"])
 def getMoreInfo():
-  return "This is all yo extra info"
+  more_info = Test.getMoreInfo()
+  return json.dumps(more_info)
 
 
 
