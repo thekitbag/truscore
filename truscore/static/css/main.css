@@ -98,7 +98,7 @@
     border: 2px solid black;
     margin: 10%;
     background-color: grey;
-    opacity: 0.7;
+    opacity: 0.95;
 }
 
 .close-btn {
@@ -117,10 +117,33 @@
 	cursor: pointer;
 }
 
+
 .modal-container {
     height: 120px;
     position: relative;
     bottom: 44%;
     background-color: white;
     border: 2px solid black;
+}
+
+.more-info-data {
+    border: 1px solid black;
+}
+
+.title {
+    font-weight: 800;
+    float: left;
+    width: 20%;
+    margin-right: 5%;
+    margin: right;
+}
+
+.value {
+    font-size:16px;
+}
+
+.row {
+    display: inline-table;
+    width: 100%;
+    border: 1px solid black;
 }

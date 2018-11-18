@@ -93,6 +93,12 @@ def getMoreInfo():
   return json.dumps(more_info)
 
 
+@app.route("/sendRating", methods=["GET", "POST"])
+def sendRating():
+  send_rating = Test.sendRating()
+  return json.dumps(send_rating)
+
+
 
 
 

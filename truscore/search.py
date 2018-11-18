@@ -15,8 +15,11 @@ class Test():
 		"recent votes": {"John Doe(987)": "1*", "Migulito(13)": "5*", "Pavel13": "2*"},
 		"best bits": {"Beach": 9, "Pool":7, "Staff":3},
 		"worst bits": {"Food": 28, "Staff": 14, "cleanliness": 10},
-		"selected comments": 
+		"comments": 
 			[{"name": "John Doe", "user reliability": 85, "date": "November 15th 2018", "comment": "Don't go here if you want to drink beer. Food also inedible."}]
 		}
 		return more_info
+
+	def sendRating():
+		return "rating submitted"
 
