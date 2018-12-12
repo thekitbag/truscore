@@ -54,12 +54,14 @@ class Test():
 		"""takes the date of a vote and who cast it and gives it a weight from 0 to 100"""
 		personality = Test.calculateUserPersonality(user)
 		date_score = Test.calculateDateWeighting(date)
+		user_score = Test.calculateUserReliability(user)
 		if vote_value < 2.5 and personality > 0:
 			personality_score = 2
 		elif vote_value > 2.5 and personality < 0:
 			personality_score = 2
-		vote_weight = personality_score * date_score
-		print("vote weight:", vote_weight)
+		else: personality_score = 1
+		vote_weight = personality_score * date_score * user_score
+		print("user:", user, "overall vote weight:", vote_weight)
 		return vote_weight
 
 	def calculateUserPersonality(username):
@@ -75,6 +77,19 @@ class Test():
 		elif average_vote < 5:
 			return 2
 
+	def calculateUserReliability(username):
+		user = User.getUserByUsername(username)
+		number_of_votes = len(user.votes)
+		if number_of_votes < 5:
+			reliability = 0.25
+		elif number_of_votes < 20
+			reliability = 1
+		elif number_of_votes < 50
+			reliability = 2
+		return reliability
+
+
+
 	def days_ago(year, month, day):
 		input_date = date(year, month, day)
 		today = date.today()
@@ -87,19 +102,19 @@ class Test():
 		day = int(date[8:10])
 		days_since_vote = Test.days_ago(year,month,day)
 		if days_since_vote < 7:
-			return 1
+			return 4
 		elif days_since_vote < 21:
-			return 0.75
+			return 3
 		elif days_since_vote < 50:
-			return 0.50
+			return 2
 		elif days_since_vote < 100:
-			return 0.25
+			return 1
 
  
 
 test_votes = [
-{'date': '2018-11-27', 'user':'mark', 'score':2},
-{'date': '2018-10-23', 'user':'paul', 'score':5}
+{'date': '2018-11-27', 'user':'mark', 'score':5},
+{'date': '2018-10-23', 'user':'paul', 'score':2}
 ]
 
 positive_votes = [3,4,4,5,4,4,5]
@@ -129,5 +144,5 @@ paul.votes = negative_votes
 users.append(mark)
 users.append(paul)
 
-
+print(test_votes)
 print(Test.calculateTrueScore(test_votes))
