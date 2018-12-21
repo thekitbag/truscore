@@ -1,5 +1,6 @@
 from random import randint
 from datetime import date
+from .models import Vote
 
 class Test():
 
@@ -82,9 +83,9 @@ class Test():
 		number_of_votes = len(user.votes)
 		if number_of_votes < 5:
 			reliability = 0.25
-		elif number_of_votes < 20
+		elif number_of_votes < 20:
 			reliability = 1
-		elif number_of_votes < 50
+		elif number_of_votes < 50:
 			reliability = 2
 		return reliability
 
@@ -144,5 +145,4 @@ paul.votes = negative_votes
 users.append(mark)
 users.append(paul)
 
-print(test_votes)
-print(Test.calculateTrueScore(test_votes))
+

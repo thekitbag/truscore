@@ -22,3 +22,17 @@ class User(db.Model):
 
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
+
+class Vote(db.Model):
+  __tablename__ = 'votes'
+  uid = db.Column(db.Integer, primary_key = True)
+  date = db.Column(db.String(100))
+  vote = db.Column(db.String(100))
+  username = db.Column(db.String(120), unique=True)
+  establishment = db.Column(db.String(100))
+
+  def __init__(self, date, vote, username, establishment):
+    self.date = date
+    self.vote = vote
+    self.username = username
+    self.establishment = establishment

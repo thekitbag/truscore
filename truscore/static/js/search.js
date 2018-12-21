@@ -14,8 +14,8 @@ function getMoreInfo(id) {
 	xhr.send(JSON.stringify(data));
 }
 
-function sendRating(id) {
-	let data = {"id": id}
+function sendRating(score, establishment) {
+	let data = {"score": score, "establishment":establishment}
 	url = '/sendRating'
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, true);
@@ -169,11 +169,12 @@ function addCloseButtonListener() {
 function addSubmitButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.submit-rating')) {
-			sendRating(69);
+			sendRating(69, this.id);
 			
 		}
 
 	}, false)};
+
 
 addMoreInfoListeners();
 addRateListeners();

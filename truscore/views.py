@@ -1,8 +1,9 @@
 from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
-from .models import User
+from .models import User, Vote
 from .forms import SignupForm, LoginForm, SearchForm
 from .search import Test
+import datetime
 
 @app.route("/")
 def index():
@@ -95,8 +96,15 @@ def getMoreInfo():
 
 @app.route("/sendRating", methods=["GET", "POST"])
 def sendRating():
-  send_rating = Test.sendRating()
-  return json.dumps(send_rating)
+  rating = int(request.json['score'])
+  establishment = str(request.json['establishment'])
+  email = str(session['email'])
+  now = datetime.datetime.now()
+  today = now.strftime("%Y-%m-%d")
+  vote = Vote(today, rating, email, establishment)
+  db.session.add(vote)
+  db.session.commit()
+  return "success"
 
 
 
