@@ -18,3 +18,4 @@ class SearchForm(Form):
   search = StringField('Enter a bar, hotel, or restaurant name', validators=[DataRequired("Please enter a search term.")])
   submit = SubmitField("Search")
 
+

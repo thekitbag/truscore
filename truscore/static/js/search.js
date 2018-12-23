@@ -92,8 +92,9 @@ function displayMoreInfo(json) {
 function displayRateScreen() {
 	let container = document.getElementById('search-results');
 	let modal = document.createElement("div");
+	let div_id = 'more-info-modal';
 	modal.setAttribute("class", "modal");
-	modal.setAttribute("id", "more-info-modal");
+	modal.setAttribute("id", div_id);
 	container.appendChild(modal);
 	let close_btn = document.createElement("div");
 	close_btn.setAttribute("class", "close-btn");
@@ -110,8 +111,8 @@ function displayRateScreen() {
 	abs.innerHTML = "Say how good this was in absolute terms"
 	rel.innerHTML = "Say how good this was given how much it cost"
 	let submit_btn = document.createElement("div");
-	submit_btn.setAttribute("class", "btn submit-rating");
-	submit_btn.setAttribute("ID", "submt-rating");
+	submit_btn.setAttribute("class", "btn submit-rating" + this.parent.id);
+	submit_btn.setAttribute("ID", "submit-rating");
 	submit_btn.innerHTML = "submit rating";
 	modal.appendChild(submit_btn);
 
@@ -158,7 +159,7 @@ function addRateListeners() {
 function addCloseButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.close-btn')) {
-			let modal = document.getElementById('more-info-modal')
+			let modal = event.target.parentNode
 			let container = document.getElementById('search-results')
 			container.removeChild(modal);
 			
@@ -169,7 +170,9 @@ function addCloseButtonListener() {
 function addSubmitButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.submit-rating')) {
-			sendRating(69, this.id);
+			let length = event.target.id.length
+			let name = event.target.id.slice(5,length);
+			sendRating(69, name);
 			
 		}
 

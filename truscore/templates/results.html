@@ -10,7 +10,21 @@
 			<div class="score"> Truscore: {{result['score']}}</div>			 
 			<div class="btn more-info" id="more-info-{{result['uuid']}}">More info</div>
 			<div class="btn rate" id="rate-{{result['uuid']}}">Rate</div>		
-	</div>	
+	</div>
+	<div class="rating-modal" id="rating-modal{{result['uuid']}}">
+			<div class="close-btn" id="close-{{result['name']}}">X</div>
+			<form class="rating-form" id="rating-form-{{result['name']}}">
+				<select id="rating-selector">
+				  <option value=1>1</option>
+				  <option value=2>2</option>
+				  <option value=3>3</option>
+				  <option value=4>4</option>
+				  <option value=5>5</option>
+				</select>
+				<button class="btn submit-rating" id="rate-{{result['name']}}">Submit</button>
+			</form>		 
+	</div>
+
 {% endfor %}
 <script src="../static/js/search.js?v=6"></script>
 {% endblock %}
