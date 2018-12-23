@@ -150,8 +150,10 @@ function addMoreInfoListeners() {
 function addRateListeners() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.rate')) {
-			let id = event.target.id[6];
-			displayRateScreen();
+			let length = event.target.id.length
+			let button_id = event.target.id.slice(5,length);
+			let id = 'rating-modal-' + button_id
+			document.getElementById(id).style.display = 'block'
 		}
 
 	}, false)};
@@ -159,10 +161,7 @@ function addRateListeners() {
 function addCloseButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.close-btn')) {
-			let modal = event.target.parentNode
-			let container = document.getElementById('search-results')
-			container.removeChild(modal);
-			
+			event.target.parentNode.style.display = 'none';			
 		}
 
 	}, false)};
