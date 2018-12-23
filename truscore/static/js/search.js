@@ -89,47 +89,7 @@ function displayMoreInfo(json) {
 	populateMoreInfo(json)	
 }
 
-function displayRateScreen() {
-	let container = document.getElementById('search-results');
-	let modal = document.createElement("div");
-	let div_id = 'more-info-modal';
-	modal.setAttribute("class", "modal");
-	modal.setAttribute("id", div_id);
-	container.appendChild(modal);
-	let close_btn = document.createElement("div");
-	close_btn.setAttribute("class", "close-btn");
-	close_btn.setAttribute("id", "close-more-info");
-	modal.appendChild(close_btn);
-	close_btn.innerHTML = "X";
-	addRateContainer("absolute-quality-container");
-	addRateContainer("relative-quality-container");
-	addRateContainer("rate-worst-bits-container");
-	addRateContainer("rate-best-bits-container");
-	addRateContainer("give-comments-container");
-	let abs = document.getElementById("absolute-quality-container")
-	let rel = document.getElementById("relative-quality-container")
-	abs.innerHTML = "Say how good this was in absolute terms"
-	rel.innerHTML = "Say how good this was given how much it cost"
-	let submit_btn = document.createElement("div");
-	submit_btn.setAttribute("class", "btn submit-rating" + this.parent.id);
-	submit_btn.setAttribute("ID", "submit-rating");
-	submit_btn.innerHTML = "submit rating";
-	modal.appendChild(submit_btn);
-
-}
-	
-
-
 function addMoreInfoContainer(idName) {
-	let container = document.createElement("div");
-	container.setAttribute("class", "modal-container");
-	container.setAttribute("id", idName);
-	let modal = document.getElementById("more-info-modal")
-	modal.appendChild(container);
-
-}
-
-function addRateContainer(idName) {
 	let container = document.createElement("div");
 	container.setAttribute("class", "modal-container");
 	container.setAttribute("id", idName);
@@ -161,7 +121,7 @@ function addRateListeners() {
 function addCloseButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.close-btn')) {
-			event.target.parentNode.style.display = 'none';			
+		//	event.target.parentNode.style.display = 'none';			
 		}
 
 	}, false)};
@@ -171,7 +131,10 @@ function addSubmitButtonListener() {
 		if (event.target.matches('.submit-rating')) {
 			let length = event.target.id.length
 			let name = event.target.id.slice(5,length);
-			sendRating(69, name);
+			let selector_id = 'rating-selector-'+name
+			let dropdown = document.getElementById(selector_id)
+			let selected = dropdown.options[dropdown.selector_id].value
+			sendRating(selected, name);		
 			
 		}
 

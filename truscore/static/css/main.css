@@ -105,7 +105,7 @@
     display: inline;
     background-color: white;
     position: relative;
-    bottom: 75px;
+    bottom: 12px;
     left: 99%;
     font-size: 20px;
     border: 1px solid black;
@@ -128,9 +128,9 @@
 
 .rating-modal {
     display: none;
-    height:120px;
-    position: relative;
-    bottom: 44%;
+    height: 76%;
+    width: 80%;
+    position: fixed;
     background-color: pink;
     border: 2px solid black;
 }
