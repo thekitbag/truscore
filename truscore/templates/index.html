@@ -1,35 +1,29 @@
-{% extends "base.html" %}
+{% extends "logged_out_base.html" %}
 
 {% block content %}
-  <main class="hero-section">
-    <div class="container">      
-      <div class="section-content">        
-        <a href="{{ url_for('signup') }}" class="btn-primary">Sign up</a>
-        <a href="{{ url_for('login') }}" class="btn-secondary">Log in</a>
-        <a href="{{ url_for('about') }}" class="btn-secondary">Learn more</a> 
-      </div>
+  <main>
+    <div class="container">
       <div class="search-section">
         <form method="POST" action="/search">
         {{ form.hidden_tag() }}   
 
-        <div class="form-group">
-          {{ form.search.label }}
+          <div class="form-group">
+            {{ form.search.label(class='title-search')}}
 
-          {% if form.search.errors %}
-            {% for error in form.password.errors %}
-              <p class="error-message">{{ error }}</p>
-            {% endfor %}
-          {% endif %}
+            {% if form.search.errors %}
+              {% for error in form.password.errors %}
+                <p class="error-message">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
 
-          {{ form.search }}
-        </div>
+            {{ form.search(class='enter-search-term') }}
+          </div>
 
-        {{ form.submit(class="btn-primary") }}
-      </form>
+        {{ form.submit(class="btn submit-search") }}
+        </form>        
       </div>
-
-      <div class="clearfix"></div>
-
+      <div id="background-pic">
+      </div>
     </div>
   </main>
 {% endblock %}

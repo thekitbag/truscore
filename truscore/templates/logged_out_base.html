@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" >
+    <meta http-equiv="Cache-Control" content="no-cache"/> 
+  </head>
+  <body class="body">
+    <header>
+      <div class="header-bar">
+        <h1 class="title">Truscore</h1>
+      </div>
+
+    </header>
+    <div class="header-bar">       
+      <a href="{{ url_for('signup') }}" class="btn-primary">Sign up</a>
+      <a href="{{ url_for('login') }}" class="btn-secondary">Log in</a>
+      <a href="{{ url_for('about') }}" class="btn-secondary">Learn more</a>
+    </div>        
+    {% block content %}
+    {% endblock %}    
+  </body>
+</html>

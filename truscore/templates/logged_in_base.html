@@ -5,15 +5,11 @@
     <meta http-equiv="Cache-Control" content="no-cache"/> 
   </head>
   <body>
-    <header>
-      <div class="header-bar">
-        <h1 class="title">Truscore</h1>
-      </div>
-
-    </header>
-    
+  <div class="header-bar">       
+    <a href="{{ url_for('x') }}" class="btn-primary">Home</a>
+    <a href="{{ url_for('x') }}" class="btn-secondary">My Account</a>
+  </div>        
     {% block content %}
-    {% endblock %}
-    
+    {% endblock %}    
   </body>
 </html>

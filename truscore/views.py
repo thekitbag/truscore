@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User, Vote
 from .forms import SignupForm, LoginForm, SearchForm
-from .search import Test
+from .search import Truscore, AggregateResults
 import datetime
 
 @app.route("/")
@@ -72,21 +72,12 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-  if request.method == "GET":
     if 'email' in session:
-      results = Test.getResults()
+      query = 'dummy data'
+      results = AggregateResults.collateResults(query)
       return render_template('search.html', name=session.get('name'), searchResults=results)
     else:
       return redirect(url_for('index'))
-
-  if request.method == "POST":
-    results = Test.getResults()
-    return redirect(url_for('searchResults', searchResults=results))
-
-@app.route("/searchResults")
-def searchResults():
-  results = Test.getResults()
-  return render_template('results.html', searchResults=results)
 
 @app.route("/getMoreInfo", methods=["GET", "POST"])
 def getMoreInfo():

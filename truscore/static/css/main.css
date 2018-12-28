@@ -1,21 +1,39 @@
-.header-bar {
-	height: 50px;
-	width: 100%;
-	background-color: grey;
-	text-align: center;
+.body {
+    min-width: 720px;
 }
+
+.header-bar {
+    height: 136px;
+    width: 99.8%;
+    background-color: grey;
+    text-align: center;
+}
+
+
 .section-content {
 	background-color: teal;
 
 
 }
 
-.section-content a{
-	float: left;
-	height: 70px;
-	width: 20%;
-	background-color: green;
-	margin-left: 2%;
+.header-bar a {
+    text-decoration: none;
+    float: left;
+    height: 70px;
+    width: 33%;
+    margin-bottom: 20px%;
+    background-color: green;
+    border: 1px solid black;
+    font-size: 44px;
+    text-align: center;
+    color: black;
+    font-weight: 800;
+    vertical-align: center;
+    font-style: none;
+}
+
+.header-bar a:hover {
+    background-color: teal;
 }
 
 
@@ -35,6 +53,7 @@
 	background-color: green;
 	border-radius: 5px;
 	text-align: center;
+    font-weight: 600;
 
 }
 
@@ -69,7 +88,10 @@
 	font-size: 40px;
 }
 
-
+.number-of-votes {
+    float: left;
+    font-size: 14px;
+}
 .more-info {
     float: right;
     width: 15%;
@@ -142,9 +164,33 @@
 .title {
     font-weight: 800;
     float: left;
-    width: 20%;
+    width: 100%;
     margin-right: 5%;
     margin: right;
+    font-size: 54px;
+}
+
+.title-search {
+    font-size: 36px;
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.enter-search-term {
+    margin-left: 5%;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.submit-search {
+    width: 50%;
+    height: 42px;
+    margin-left: 25%;
+    font-size:28px;
 }
 
 .value {
@@ -155,4 +201,16 @@
     display: inline-table;
     width: 100%;
     border: 1px solid black;
+}
+
+#background-pic {
+    background-image: url(../img/hotelbar.jpg);
+    height: 400px;
+    width: 100%;
+    background-repeat: round;
+}
+
+.search-section {
+    background-color: silver;
+    padding-bottom: 10px;
 }

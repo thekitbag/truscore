@@ -112,6 +112,7 @@ function addRateListeners() {
 		if (event.target.matches('.rate')) {
 			let length = event.target.id.length
 			let button_id = event.target.id.slice(5,length);
+			console.log(button_id)
 			let id = 'rating-modal-' + button_id
 			document.getElementById(id).style.display = 'block'
 		}
@@ -121,7 +122,7 @@ function addRateListeners() {
 function addCloseButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.close-btn')) {
-		//	event.target.parentNode.style.display = 'none';			
+			event.target.parentNode.style.display = 'none';			
 		}
 
 	}, false)};
@@ -133,17 +134,38 @@ function addSubmitButtonListener() {
 			let name = event.target.id.slice(5,length);
 			let selector_id = 'rating-selector-'+name
 			let dropdown = document.getElementById(selector_id)
-			let selected = dropdown.options[dropdown.selector_id].value
+			let selected = dropdown.options[dropdown.selectedIndex].value;
 			sendRating(selected, name);		
 			
 		}
 
 	}, false)};
 
+function addSubmitNewButtonListener() {
+	document.addEventListener('click', function (event) {
+		if (event.target.matches('.submit-new-rating')) {
+			let name = document.getElementById("establishment-name").value
+			let dropdown = document.getElementById('rating-selector-new')
+			let selected = dropdown.options[dropdown.selectedIndex].value;
+			sendRating(selected, name);		
+			
+		}
 
+	}, false)};
+
+function addNewReviewListener() {
+	document.addEventListener('click', function (event) {
+		if (event.target.matches('.new-review')) {
+			document.getElementById('rating-modal-new').style.display = 'block'
+					
+		}
+
+	}, false)};
+
+addNewReviewListener();
 addMoreInfoListeners();
 addRateListeners();
 addCloseButtonListener();
 addSubmitButtonListener();
-
+addSubmitNewButtonListener();
 
