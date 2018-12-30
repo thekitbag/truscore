@@ -53,7 +53,6 @@ class Truscore():
 			for each_vote in votes:
 				if each_vote.username == username:
 					total_votes += 1
-					print(username, total_votes)
 			if total_votes < 5:
 				voter_weight = 1
 			elif total_votes < 10:

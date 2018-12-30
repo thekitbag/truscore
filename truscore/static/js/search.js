@@ -162,6 +162,8 @@ function addNewReviewListener() {
 
 	}, false)};
 
+
+
 addNewReviewListener();
 addMoreInfoListeners();
 addRateListeners();

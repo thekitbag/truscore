@@ -2,14 +2,14 @@
 
 {% block content %}
   <main class="container signup-section">
-    <div class="section-content">
+    <div class="section signup">
       <h2>Create an account</h2>
 
       <form method="POST" action="/signup">
         {{ form.hidden_tag() }}
 
         <div class="form-group">
-          {{ form.first_name.label }}
+          {{ form.first_name.label(class='form-label')}}
 
           {% if form.first_name.errors %}
             {% for error in form.first_name.errors %}
@@ -17,11 +17,11 @@
             {% endfor %}
           {% endif %}
 
-          {{ form.first_name }}
+          {{ form.first_name(class='form-entry-field')}}
         </div>
 
         <div class="form-group">
-          {{ form.last_name.label }}
+          {{ form.last_name.label(class='form-label')}}
 
           {% if form.last_name.errors %}
             {% for error in form.last_name.errors %}
@@ -29,11 +29,11 @@
             {% endfor %}
           {% endif %}
 
-          {{ form.last_name }}
+          {{ form.last_name(class='form-entry-field')}}
         </div>
 
         <div class="form-group">
-          {{ form.email.label }}
+          {{ form.email.label(class='form-label')}}
 
           {% if form.email.errors %}
             {% for error in form.email.errors %}
@@ -41,11 +41,11 @@
             {% endfor %}
           {% endif %}
 
-          {{ form.email }}
+          {{ form.email(class='form-entry-field')}}
         </div>
 
         <div class="form-group">
-          {{ form.password.label }}
+          {{ form.password.label(class='form-label')}}
 
           {% if form.password.errors %}
             {% for error in form.password.errors %}
@@ -53,14 +53,11 @@
             {% endfor %}
           {% endif %}
 
-          {{ form.password }}
+          {{ form.password(class='form-entry-field') }}
         </div>
 
-        {{ form.submit(class="btn-primary") }}
+        {{ form.submit(class="btn signup-btn") }}
       </form>
-
-      <h2>Already got an account?</h2>
-      <a href="{{ url_for('login') }}" class="btn-primary">Sign up</a>
     </div>
   </main>
 {% endblock %}

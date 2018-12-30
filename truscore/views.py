@@ -72,12 +72,30 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+  form = SearchForm()
+  query = 'dummy data'
+  results = AggregateResults.collateResults(query)
+  if request.method == "GET":
     if 'email' in session:
-      query = 'dummy data'
-      results = AggregateResults.collateResults(query)
-      return render_template('search.html', name=session.get('name'), searchResults=results)
+      return render_template('search.html', name=session.get('name'), form = SearchForm())
     else:
       return redirect(url_for('index'))
+  elif request.method == "GET":
+    return redirect(url_for('results'))
+
+@app.route("/results", methods=["GET", "POST"])
+def displayResults():
+  query = 'dummy data'
+  results = AggregateResults.collateResults(query)
+  if 'email' in session:    
+    return render_template('logged_in_results.html', name=session.get('name'), searchResults=results)
+  else:
+    return render_template('logged_out_results.html', searchResults=results)
+
+@app.route("/profile", methods=["GET"])
+def profile():
+  return render_template('profile.html')
+
 
 @app.route("/getMoreInfo", methods=["GET", "POST"])
 def getMoreInfo():

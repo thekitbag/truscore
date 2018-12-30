@@ -3,6 +3,31 @@
 <a class="btn logout" href="/logout">Logout</a>
 
 {% block content %}
+  <main>
+    <div class="container">
+      <div class="search-section">
+        <form method="POST" action="/results">
+        {{ form.hidden_tag() }}   
+
+          <div class="form-group">
+            {{ form.search.label(class='title-search')}}
+
+            {% if form.search.errors %}
+              {% for error in form.password.errors %}
+                <p class="error-message">{{ error }}</p>
+              {% endfor %}
+            {% endif %}
+
+            {{ form.search(class='enter-search-term') }}
+          </div>
+
+        {{ form.submit(class="btn submit-search") }}
+        </form>        
+      </div>
+      <div id="background-pic">
+      </div>
+    </div>
+  </main>
 {% endblock %}
 
 
