@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class ="btn new-review" id="btn new-review">Add Review</div>
+<div class="rating-modal" id="rating-modal-new">
+			<div class="close-btn" id="close-new">X</div>
+			<div class="rating-title" id="rating-title-new">Add New Review
+			</div>
+			<div class="rating-description" id="rating-description-new">
+				Tell us about this new place
+			</div>
+			<form class="rating-form" id="rating-form-new">
+				<h2>What was it called?</h2>
+				<input type="text" id="establishment-name">
+				<h3>How would you rate it out of 5</h3>
+				<select id="rating-selector-new">
+				  <option value=1>1</option>
+				  <option value=2>2</option>
+				  <option value=3>3</option>
+				  <option value=4>4</option>
+				  <option value=5>5</option>
+				</select>
+				<button class="btn submit-new-rating" id="rate-new">Submit</button>
+			</form>		 
+	</div>
+<div id="search-results">
+{% for result in searchResults %}
+	<div class="result" id="{{result['establishment']}}">
+			<div class="entry"> {{result['establishment']}}</div>
+			<div class="score"> Truscore: {{result['truscore']['score']}}</div>
+			<div class="number-of-votes"> Votes: {{result['truscore']['number of votes']}}</div>			 
+			<div class="btn more-info" id="more-info-{{result['establishment']}}">More info</div>
+			<div class="btn rate" id="rate-{{result['establishment']}}">Rate</div>		
+	</div>
+	<div class="rating-modal" id="rating-modal-{{result['establishment']}}">
+			<div class="close-btn" id="close-{{result['establishment']}}">X</div>
+			<div class="rating-title" id="rating-title-{{result['establishment']}}">{{result['establishment']}}
+			</div>
+			<div class="rating-description" id="rating-description-{{result['establishment']}}">
+				Tell us what you thought of {{result['establishment']}}
+			</div>
+			<form class="rating-form" id="rating-form-{{result['establishment']}}">
+				<h3>How would you rate {{result['establishment']}} out of 5</h3>
+				<select id="rating-selector-{{result['establishment']}}">
+				  <option value=1>1</option>
+				  <option value=2>2</option>
+				  <option value=3>3</option>
+				  <option value=4>4</option>
+				  <option value=5>5</option>
+				</select>
+				<button class="btn submit-rating" id="rate-{{result['establishment']}}">Submit</button>
+			</form>		 
+	</div>
+
+{% endfor %}
+<script src="../static/js/search.js?v=7"></script>
+{% endblock %}
+
