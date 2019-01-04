@@ -5,13 +5,13 @@
 
 .header-bar {
     height: 100px; 
-    width:99%;  
+    width:100%;  
     background-color: grey;
     text-align: center;
 }
 
 .logged-in a{
-    width: calc(33% - 2px);
+    width: calc(100% / 3 - 2px)
 }
 
 .logged-out a{
@@ -21,6 +21,7 @@
 .form-group {
     margin-bottom: 6px;
 }
+
 
 .form-label {
     display: block;
@@ -111,7 +112,7 @@
 }
 
 .result {
-	width: 100%;
+	width: calc(100% - 5px);
 	height:50px;
 	border: 3px solid blue;
 	float: left;
@@ -135,20 +136,22 @@
 .number-of-votes {
     float: left;
     font-size: 14px;
+    margin-left: 1%;
+    margin-top: 17px;
 }
 .more-info {
     float: right;
     width: 15%;
     font-size: 30px;
-    margin-top: 5px;
+    margin-top: 8px;
     margin-right: 2%;
 }
 
 .rate {
     float: right;
-    width: 15%%;
+    width: 15%;
     font-size: 30px;
-    margin-top: 5px;
+    margin-top: 8px;
     margin-right: 2%;
     background-color: blue;
 }
@@ -194,15 +197,35 @@
 
 .rating-modal {
     display: none;
-    height: 76%;
+    height: 92%;
     width: 80%;
     position: fixed;
+    right: 10%;
+    bottom: 4%;
     background-color: pink;
     border: 2px solid black;
 }
 
+
+.new-review {
+    display: inline-block;
+    height: 50px;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 20px;
+    font-size: 36px;
+    text-align: center;
+}
+
 .more-info-data {
     border: 1px solid black;
+}
+
+.rating-title {
+    font-size: 44px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 12px;
 }
 
 .title {
@@ -257,4 +280,49 @@
 .search-section {
     background-color: silver;
     padding-bottom: 10px;
+}
+
+.rating-form {
+    width: 90%;
+    margin-left: 5%
+}
+
+.form-body {
+    width: 46%;
+    float: left;
+    margin-right: 2%;
+    margin-left: 2%;
+    margin-bottom: 14px;
+    background-color: grey;
+    position: relative;
+    top: 0px;
+    bottom: 16px;
+}
+
+.form-body h3 {
+    text-align: center;
+}
+
+.form-body select {    
+    width: 50%;
+    margin-left: 25%;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.form-body input {
+    display: block;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 5px;
+    font-size: 25px;
+}
+
+.form-section {
+    border: 1px solid black;
+    height: 120px;
+}
+
+#question5 {
+    width: 96%;
 }
