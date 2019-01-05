@@ -1,11 +1,37 @@
 from random import randint
 from datetime import date
 from .models import Vote
+from truscore import app, es
 
-class AggregateResults():
+
+
+class Results():
+
+	def elasicSearchResults(query):
+		esJSON = es.search(index='establishments', doc_type='establishment', body={'query': {'match': {'text': query}}})
+		return esJSON['hits']
+
+
+
 	def collateResults(query):
 		"""returns all results for a given query"""
-		votes = Vote.query.all()
+		if query == "all":
+			votes = Vote.query.all()
+			return Results.returnData(votes)
+		else:
+			results_data = Results.elasicSearchResults(query)
+			if results_data['total'] == 0:
+				return []
+			else:
+				returned_establishments = results_data['hits']
+				print("printing all returned results", returned_establishments)
+				first_hit = returned_establishments[0]
+				place =first_hit['_source']['text']
+				votes = Vote.query.filter_by(establishment=place)
+				return Results.returnData(votes)
+		
+	def returnData(votes):
+		"""takes a list of vote objects and returns the information to the view to display"""
 		results = []
 		establishments = set()
 		for vote in votes:
@@ -16,7 +42,6 @@ class AggregateResults():
 			resultData['truscore'] = Truscore.calculateTruscore(votes, establishment_name)
 			results.append(resultData)
 		return results
-
 
 class Truscore():
 	def calculateTruscore(votes, establishment_name):
@@ -65,7 +90,11 @@ class Truscore():
 
 	def adjustForNumberOfVotes(initial_score, number_of_votes):
 		diff = 50-initial_score
-		if number_of_votes < 5:
+		if number_of_votes < 2:
+			new_diff = diff/3
+		elif number_of_votes < 3:
+			new_diff = diff/2
+		elif number_of_votes < 5:
 			new_diff = diff/1.5
 		elif number_of_votes < 10:
 			new_diff = diff/1.3

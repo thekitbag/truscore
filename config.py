@@ -8,6 +8,8 @@ class Config(object):
     CSRF_ENABLED = True
     SECRET_KEY = 'abcdef123456'
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
+
 
 
 class ProductionConfig(Config):

@@ -3,6 +3,9 @@
 {% block content %}
 
 <div id="search-results">
+
+{% if searchResults %}
+
 {% for result in searchResults %}
 	<div class="result" id="{{result['establishment']}}">
 			<div class="entry"> {{result['establishment']}}</div>
@@ -93,3 +96,4 @@
 <script src="../static/js/search.js?v=7"></script>
 {% endblock %}
 
+{% endif %}

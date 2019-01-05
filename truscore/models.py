@@ -1,7 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import generate_password_hash, check_password_hash
+from truscore import db, app, es
 
-from truscore import db
+
 
 class User(db.Model):
   __tablename__ = 'users'
@@ -23,8 +24,10 @@ class User(db.Model):
   def check_password(self, password):
     return check_password_hash(self.pwdhash, password)
 
+
 class Vote(db.Model):
   __tablename__ = 'votes'
+  __searchable__ = ['establishment']
   uid = db.Column(db.Integer, primary_key = True)
   date = db.Column(db.String(100))
   vote = db.Column(db.String(100))
@@ -36,3 +39,4 @@ class Vote(db.Model):
     self.vote = vote
     self.username = username
     self.establishment = establishment
+    es.index(index='establishments', doc_type='establishment', body={'text': establishment})

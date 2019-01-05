@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User, Vote
 from .forms import SignupForm, LoginForm, SearchForm
-from .search import Truscore, AggregateResults
+from .search import Truscore, Results
 import datetime
 
 @app.route("/")
@@ -72,21 +72,19 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-  form = SearchForm()
-  query = 'dummy data'
-  results = AggregateResults.collateResults(query)
+  form = SearchForm  
   if request.method == "GET":
     if 'email' in session:
       return render_template('search.html', name=session.get('name'), form = SearchForm())
     else:
       return redirect(url_for('index'))
-  elif request.method == "GET":
-    return redirect(url_for('results'))
+  elif request.method == "POST":
+    return redirect(url_for('displayResults', query=request.form['search']))
 
 @app.route("/results", methods=["GET", "POST"])
 def displayResults():
-  query = 'dummy data'
-  results = AggregateResults.collateResults(query)
+  query = request.args['query']
+  results = Results.collateResults(query)
   if 'email' in session:    
     return render_template('logged_in_results.html', name=session.get('name'), searchResults=results)
   else:
@@ -105,15 +103,19 @@ def getMoreInfo():
 
 @app.route("/sendRating", methods=["GET", "POST"])
 def sendRating():
-  rating = int(request.json['score'])
+  email = session['email']
   establishment = str(request.json['establishment'])
-  email = str(session['email'])
-  now = datetime.datetime.now()
-  today = now.strftime("%Y-%m-%d")
-  vote = Vote(today, rating, email, establishment)
-  db.session.add(vote)
-  db.session.commit()
-  return "success"
+  rating = Vote.query.filter_by(username=email, establishment=establishment).first()
+  if rating is None:
+    rating = int(request.json['score'])
+    email = str(session['email'])
+    now = datetime.datetime.now()
+    today = now.strftime("%Y-%m-%d")
+    vote = Vote(today, rating, email, establishment)
+    db.session.add(vote)
+    db.session.commit()
+    return "success"
+  else: return "you has already voted on this place you cheeky sod"
 
 
 
