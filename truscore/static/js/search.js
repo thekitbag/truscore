@@ -122,7 +122,7 @@ function addRateListeners() {
 function addCloseButtonListener() {
 	document.addEventListener('click', function (event) {
 		if (event.target.matches('.close-btn')) {
-			event.target.parentNode.style.display = 'none';			
+			event.target.parentNode.parentNode.style.display = 'none';			
 		}
 
 	}, false)};
@@ -155,14 +155,34 @@ function addSubmitNewButtonListener() {
 
 function addNewReviewListener() {
 	document.addEventListener('click', function (event) {
-		if (event.target.matches('.new-review')) {
-			document.getElementById('rating-modal-new').style.display = 'block'
+		if (event.target.matches('#btn-new-review')) {
+			document.getElementById('new-rating-modal').style.display = 'block'
 					
 		}
 
 	}, false)};
 
+function addNextScreenListener() {
+	document.addEventListener('click', function (event) {
+		if (event.target.matches('.next-screen')) {
+			let divs_to_hide = document.getElementsByClassName("form-group-1")
+			let divs_to_show = document.getElementsByClassName("form-group-2")
+			let next_button = document.getElementById('next-screen-btn')
+			let submit_button = document.getElementById('submit')
+			next_button.style.display = 'none';
+			submit_button.style.display = 'block';
+			//divs_to_hide.push({4:next_button});
+			//divs_to_show.push(submit_button);
+			for(var i = 0; i < divs_to_hide.length; i++){
+		        divs_to_hide[i].style.display = "none";
+    		}
+    		for(var i = 0; i < divs_to_show.length; i++){
+		        divs_to_show[i].style.display = "block";
+    		}
+					
+		}
 
+	}, false)};
 
 addNewReviewListener();
 addMoreInfoListeners();
@@ -170,4 +190,4 @@ addRateListeners();
 addCloseButtonListener();
 addSubmitButtonListener();
 addSubmitNewButtonListener();
-
+addNextScreenListener();

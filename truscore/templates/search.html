@@ -4,29 +4,28 @@
 
 {% block content %}
   <main>
-    <div class="container">
-      <div class="search-section">
-        <form method="POST" action="/search" method="post"">
-        {{ form.hidden_tag() }}   
+    <div class="search-section">
+      <form method="POST" action="/search">
+      {{ form.hidden_tag() }}   
 
-          <div class="form-group">
-            {{ form.search.label(class='title-search')}}
+        <div class="form-group">
+          {{ form.search.label(class='title-search') }}
 
-            {% if form.search.errors %}
-              {% for error in form.password.errors %}
-                <p class="error-message">{{ error }}</p>
-              {% endfor %}
-            {% endif %}
+          {% if form.search.errors %}
+            {% for error in form.password.errors %}
+              <p class="error-message">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
 
-            {{ form.search(class='enter-search-term') }}
-          </div>
+          {{ form.search(class='enter-search-term') }}
+        </div>
 
-        {{ form.submit(class="btn submit-search") }}
-        </form>        
-      </div>
-      <div id="background-pic">
-      </div>
+      {{ form.submit(class="btn submit-search") }}
+      </form>        
     </div>
+    <h3>Hedgehog is the universal measure of quality. It will give a realiable score from 1-100 for the quality of anything
+      based on reviews from real users</h3>
+      <a href="/about"> Find out more</a>
   </main>
 {% endblock %}
 

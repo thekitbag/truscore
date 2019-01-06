@@ -26,13 +26,40 @@ class User(db.Model):
 
 
 class Vote(db.Model):
+  #this will be deprecated soon
   __tablename__ = 'votes'
-  __searchable__ = ['establishment']
   uid = db.Column(db.Integer, primary_key = True)
   date = db.Column(db.String(100))
   vote = db.Column(db.String(100))
   username = db.Column(db.String(120), unique=True)
-  establishment = db.Column(db.String(100))
+  product_name = db.Column(db.String(100))
+  product_category = db.Column(db.String(100))
+  product_top_1 = db.Column(db.String(100))
+  product_top_2 = db.Column(db.String(100))
+  product_top_3 = db.Column(db.String(100))
+  product_bottom_1 = db.Column(db.String(100))
+  product_bottom_2 = db.Column(db.String(100))
+  product_bottom_3 = db.Column(db.String(100))
+  comments = db.Column(db.String(160))
+
+  def __init__(self, date, vote, username, category, product_name, product_top_1, product_top_2, product_top_3, product_bottom_1, product_bottom_2, product_bottom_3, comments):
+    self.date = date
+    self.vote = vote
+    self.username = username
+    self.category = category
+    self.product_name = product_name
+    self.product_top_1 = product_top_1
+    self.product_top_2 = product_top_2
+    self.product_top_3 = product_top_3
+    self.product_bottom_1 = product_bottom_1
+    self.product_bottom_2 = product_bottom_2
+    self.product_bottom_3 = product_bottom_3
+    self.comments = comments
+    es.index(index='products', doc_type='establishment', body={'text': product_name})
+
+class Rating(db.Model):
+  __tablename__ = 'votes'
+  
 
   def __init__(self, date, vote, username, establishment):
     self.date = date
@@ -40,3 +67,6 @@ class Vote(db.Model):
     self.username = username
     self.establishment = establishment
     es.index(index='establishments', doc_type='establishment', body={'text': establishment})
+
+
+

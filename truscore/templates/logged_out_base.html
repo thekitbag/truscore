@@ -7,16 +7,12 @@
   <body class="body">
     <header>
       <div class="header-bar">
-        <h1 class="title">Truscore</h1>
+        <div class="title">Hedgehog</div>
+        <img id="logo" src="../static/img/logo.jpg" alt="Hedgehog Logo">
+        <a href="{{ url_for('login') }}" id="login-cta">Log in</a>
       </div>
 
-    </header>
-    <div class="header-bar logged-out"> 
-      <a href="{{ url_for('index') }}" class="btn-primary">Search</a>
-      <a href="{{ url_for('signup') }}" class="btn-primary">Sign up</a>
-      <a href="{{ url_for('login') }}" class="btn-secondary">Log in</a>
-      <a href="{{ url_for('about') }}" class="btn-secondary">Learn more</a>
-    </div>        
+    </header>       
     {% block content %}
     {% endblock %}    
   </body>

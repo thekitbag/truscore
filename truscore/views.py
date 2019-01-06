@@ -1,7 +1,7 @@
 from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User, Vote
-from .forms import SignupForm, LoginForm, SearchForm
+from .forms import SignupForm, LoginForm, SearchForm, ReviewNewProductForm
 from .search import Truscore, Results
 import datetime
 
@@ -12,6 +12,7 @@ def index():
     return render_template("index.html", form=form) 
   else: 
     return redirect(url_for('search', form=form, name=session.get('name')))
+
 
 @app.route("/about")
 def about():
@@ -72,10 +73,10 @@ def logout():
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-  form = SearchForm  
+  form = SearchForm()  
   if request.method == "GET":
     if 'email' in session:
-      return render_template('search.html', name=session.get('name'), form = SearchForm())
+      return render_template('search.html', name=session.get('name'), form=form)
     else:
       return redirect(url_for('index'))
   elif request.method == "POST":
@@ -85,14 +86,45 @@ def search():
 def displayResults():
   query = request.args['query']
   results = Results.collateResults(query)
+  new_product_form = ReviewNewProductForm()
   if 'email' in session:    
-    return render_template('logged_in_results.html', name=session.get('name'), searchResults=results)
+    return render_template('logged_in_results.html', name=session.get('name'), searchResults=results, form=new_product_form)
   else:
-    return render_template('logged_out_results.html', searchResults=results)
+    return render_template('logged_out_results.html', searchResults=results, form=new_product_form)
 
 @app.route("/profile", methods=["GET"])
 def profile():
   return render_template('profile.html')
+
+@app.route("/addNewRating", methods=["POST"])
+def addNewRating():
+  if 'email' in session:
+    username = email
+  else:
+    username = "guest"
+  rating = request.form['rating']
+  now = datetime.datetime.now()
+  today = now.strftime("%Y-%m-%d")
+  name = request.form['product_title']
+  category = "dummy"
+  top_1 = request.form['top_1']
+  top_2 = request.form['top_2']
+  top_3 = request.form['top_3']
+  bottom_1 = request.form['bottom_1']
+  bottom_2 = request.form['bottom_2']
+  bottom_3 = request.form['bottom_3']
+  comments = request.form['comments']
+  vote = Vote(today, rating, username, category, name, top_1, top_2, top_3, bottom_1, bottom_2, bottom_3, comments)
+  db.session.add(vote)
+  db.session.commit()
+  return url_for('index')
+  #now need to create the entry using all the data from request.form
+  #rendertemplate index
+
+
+
+
+
 
 
 @app.route("/getMoreInfo", methods=["GET", "POST"])

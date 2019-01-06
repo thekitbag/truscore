@@ -1,27 +1,92 @@
 .body {
-    min-width: 720px;
+    min-width: 320px;
     background-color: #D3D3D3;
 }
 
 .header-bar {
-    height: 100px; 
+    background: #3C3B3F;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 240px; 
     width:100%;  
     background-color: grey;
+}
+
+.header-bar a {
+    float: right;
+    position: relative;
+    top: 140px;
+    margin-bottom: 20px%;
+    font-size: 31px;
+    color: black;
+    vertical-align: center;
+    font-style: none;
+}
+
+.header-bar a:hover {
+    background-color: teal;
+}
+
+.title {
+    font-weight: 800;
+    width: 100%;
+    font-size: 54px;
     text-align: center;
+    font-family: verdana;
+    color: lightblue;
 }
 
-.logged-in a{
-    width: calc(100% / 3 - 2px)
+#logo {
+    height: 150px;
+    position: relative;
+    left: calc(50% - 75px);
+    margin-top: 8px;
 }
 
-.logged-out a{
-    width:calc(25% - 2px);
+#profile-icon {
+    height: 50px;
+    position: relative;
+    bottom: 190px;
 }
 
-.form-group {
-    margin-bottom: 6px;
+#logout-cta {
+    position: relative;
+    left: 50px;
+}
+.title-search {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    display: block;
 }
 
+.modal {
+    display: none;
+    height: 92%;
+    width: 80%;
+    position: fixed;
+    right: 10%;
+    bottom: 4%;
+    background-color: pink;
+    border: 2px solid black;
+}
+.form-group-1 {
+    display: block;
+    margin-top: 12px;
+}
+.form-group-2 {
+    display: none;
+    margin-top: 12px;
+}
+
+.submit {
+    display: none;
+    width:60%;
+    height: 32px;
+    margin-left: 20%;
+    font-size: 24px;
+    margin-top: 12px
+}
 
 .form-label {
     display: block;
@@ -30,16 +95,41 @@
     font-size: 26px;
 }
 
-.form-entry-field{
+.form-select {
+    width: 80%;
+    height: 40px;
+    font-size: 22px;
+    margin-left: 10%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.form-entry-field {
     width:80%;
+    height: 40px;
     margin-left:10%;
     margin-right: 10%;
     height:24px;
     font-size: 18px;
 }
 
+.form-textarea-field {
+    width: 80%;
+    height: 66px;
+    margin-left: 10%;
+}
+
+.next-screen {
+    width:60%;
+    height: 32px;
+    margin-left: 20%;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+
 .section {
-	background-color: teal;
+    background-color: teal;
     margin-left: 5%;
     margin-right: 5%;
     margin-top:10px;
@@ -54,23 +144,35 @@
     margin-bottom: 0;
 }
 
-.header-bar a {
-    text-decoration: none;
+.no-results {
+    height: 50px;
+    width: 40%;
     float: left;
-    height: 70px;
-    margin-bottom: 20px%;
-    background-color: green;
-    border: 1px solid black;
-    font-size: 34px;
+    font-size: 24px;
+    margin-top: 20px;
     text-align: center;
     color: black;
-    font-weight: 800;
-    vertical-align: center;
-    font-style: none;
+    text-decoration: none;
+}
+.new-search {
+    background-color: grey;
+    margin-left: 10%;
+    position:relative;
+    right: 5px;
 }
 
-.header-bar a:hover {
-    background-color: teal;
+.new-review {
+    background-color: red;
+    position: relative;
+    left: 5px;
+}
+
+.search-results {
+    height:90%;
+}
+
+.search-results h1 {
+    text-align: center;
 }
 
 
@@ -156,20 +258,6 @@
     background-color: blue;
 }
 
-.search-results {
-	height:90%;
-}
-
-.modal {
-    height: 500px;
-    position: relative;
-    bottom: 100px;
-    border: 2px solid black;
-    margin: 10%;
-    background-color: grey;
-    opacity: 0.95;
-}
-
 .close-btn {
     display: inline;
     background-color: white;
@@ -195,28 +283,6 @@
     border: 2px solid black;
 }
 
-.rating-modal {
-    display: none;
-    height: 92%;
-    width: 80%;
-    position: fixed;
-    right: 10%;
-    bottom: 4%;
-    background-color: pink;
-    border: 2px solid black;
-}
-
-
-.new-review {
-    display: inline-block;
-    height: 50px;
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 20px;
-    font-size: 36px;
-    text-align: center;
-}
-
 .more-info-data {
     border: 1px solid black;
 }
@@ -226,22 +292,6 @@
     font-weight: 800;
     text-align: center;
     margin-bottom: 12px;
-}
-
-.title {
-    font-weight: 800;
-    float: left;
-    width: 100%;
-    margin-right: 5%;
-    margin: right;
-    font-size: 54px;
-}
-
-.title-search {
-    font-size: 36px;
-    text-align: center;
-    width: 100%;
-    display: block;
 }
 
 .enter-search-term {
@@ -270,12 +320,6 @@
     border: 1px solid black;
 }
 
-#background-pic {
-    background-image: url(../img/hotelbar.jpg);
-    height: 400px;
-    width: 100%;
-    background-repeat: round;
-}
 
 .search-section {
     background-color: silver;

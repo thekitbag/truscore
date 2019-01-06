@@ -7,15 +7,13 @@
   <body class="body">
     <header>
       <div class="header-bar">
-        <h1 class="title">Truscore</h1>
-      </div>
+        <div class="title">Hedgehog</div>
+        <img id="logo" src="../static/img/logo.jpg" alt="Hedgehog Logo">
+        <a href="{{ url_for('profile') }}"><img src="../static/img/profile.png"  id="profile-icon"></a>
+        <a href="{{ url_for('logout') }}" id="logout-cta">Log out</a>
 
-    </header>
-    <div class="header-bar logged-in">       
-      <a href="{{ url_for('search') }}" class="btn-primary">Search</a>
-      <a href="{{ url_for('profile') }}" class="btn-secondary">Profile</a>
-      <a href="{{ url_for('logout') }}" class="btn-secondary">Logout</a>
-    </div>        
+      </div>
+    </header> 
     {% block content %}
     {% endblock %}    
   </body>

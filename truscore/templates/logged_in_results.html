@@ -94,6 +94,36 @@
 	</form>		 
 </div>
 <script src="../static/js/search.js?v=7"></script>
-{% endblock %}
+
+
+
+
+
+{% else %}
+
+<h1>Nothing with that name has a review yet</h1>
+
+<a href="{{url_for('index')}}" class="btn no-results new-search" href="/search">
+	New Search
+</a>
+<div class="btn no-results new-review" id="btn new-review">
+Add Review
+</div>
+<div class="modal" id="new-rating-modal"> 
+	<form method="POST" action="/results" method="post">
+	    {{ form.hidden_tag() }}   
+
+	      <div class="form-body">
+	        {{ form.product_type.label(class='form-label') }}
+
+	        {{ form.product_type(class='form-select') }}
+	      </div>
+
+	    {{ form.next_screen(class="btn next") }}
+	</form> 
+</div>
+<script src="../static/js/search.js?v=7"></script>
 
 {% endif %}
+
+{% endblock %}
