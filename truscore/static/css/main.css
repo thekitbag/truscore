@@ -219,24 +219,24 @@
 	border: 3px solid blue;
 	float: left;
 	margin-top: 10px;
-	min-width: 920px;
 	
 }
 
 .entry {
     float: left;
-    font-size: 36px;
+    font-size: 16px;
     width: 35%;
     font-weight: 800;
 }
 
 .score {
-	float: left;
-	font-size: 40px;
+	float: right;
+	font-size: 22px;
+    margin-right: 2%;
 }
 
 .number-of-votes {
-    float: left;
+    float: right;
     font-size: 14px;
     margin-left: 1%;
     margin-top: 17px;
@@ -370,3 +370,13 @@
 #question5 {
     width: 96%;
 }
+
+@media screen and (min-width: 700px) {
+  .entry {
+    font-size: 36px;
+  }
+  .score {
+    font-size: 36px;
+  }
+}
+

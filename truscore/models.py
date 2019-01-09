@@ -33,7 +33,6 @@ class Vote(db.Model):
   vote = db.Column(db.String(100))
   username = db.Column(db.String(120), unique=True)
   product_name = db.Column(db.String(100))
-  product_category = db.Column(db.String(100))
   product_top_1 = db.Column(db.String(100))
   product_top_2 = db.Column(db.String(100))
   product_top_3 = db.Column(db.String(100))
@@ -42,11 +41,10 @@ class Vote(db.Model):
   product_bottom_3 = db.Column(db.String(100))
   comments = db.Column(db.String(160))
 
-  def __init__(self, date, vote, username, category, product_name, product_top_1, product_top_2, product_top_3, product_bottom_1, product_bottom_2, product_bottom_3, comments):
+  def __init__(self, date, vote, username, product_name, product_top_1, product_top_2, product_top_3, product_bottom_1, product_bottom_2, product_bottom_3, comments):
     self.date = date
     self.vote = vote
     self.username = username
-    self.category = category
     self.product_name = product_name
     self.product_top_1 = product_top_1
     self.product_top_2 = product_top_2

@@ -2,7 +2,7 @@ from flask import session, render_template, request, redirect, url_for, json
 from truscore import app, db
 from .models import User, Vote
 from .forms import SignupForm, LoginForm, SearchForm, ReviewNewProductForm
-from .search import Truscore, Results
+from .search import Truscore, Results, MoreInfo
 import datetime
 
 @app.route("/")
@@ -99,14 +99,13 @@ def profile():
 @app.route("/addNewRating", methods=["POST"])
 def addNewRating():
   if 'email' in session:
-    username = email
+    username = session['email']
   else:
     username = "guest"
   rating = request.form['rating']
   now = datetime.datetime.now()
   today = now.strftime("%Y-%m-%d")
   name = request.form['product_title']
-  category = "dummy"
   top_1 = request.form['top_1']
   top_2 = request.form['top_2']
   top_3 = request.form['top_3']
@@ -114,10 +113,10 @@ def addNewRating():
   bottom_2 = request.form['bottom_2']
   bottom_3 = request.form['bottom_3']
   comments = request.form['comments']
-  vote = Vote(today, rating, username, category, name, top_1, top_2, top_3, bottom_1, bottom_2, bottom_3, comments)
+  vote = Vote(today, rating, username, name, top_1, top_2, top_3, bottom_1, bottom_2, bottom_3, comments)
   db.session.add(vote)
   db.session.commit()
-  return url_for('index')
+  return redirect(url_for('index'))
   #now need to create the entry using all the data from request.form
   #rendertemplate index
 
@@ -129,7 +128,8 @@ def addNewRating():
 
 @app.route("/getMoreInfo", methods=["GET", "POST"])
 def getMoreInfo():
-  more_info = Test.getMoreInfo()
+  establishment = request.json['id']
+  more_info = MoreInfo.returnMoreInfo(establishment)
   return json.dumps(more_info)
 
 

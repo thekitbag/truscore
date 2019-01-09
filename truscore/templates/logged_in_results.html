@@ -8,92 +8,65 @@
 
 {% for result in searchResults %}
 	<div class="result" id="{{result['establishment']}}">
-			<div class="entry"> {{result['establishment']}}</div>
-			<div class="score"> Truscore: {{result['truscore']['score']}}</div>
-			<div class="number-of-votes"> Votes: {{result['truscore']['number of votes']}}</div>			 
-			<div class="btn more-info" id="more-info-{{result['establishment']}}">More info</div>
-			<div class="btn rate" id="rate-{{result['establishment']}}">Rate</div>
+		<div class="entry"> {{result['establishment']}}</div>
+		<div class="number-of-votes"> Votes: {{result['truscore']['number of votes']}}
+		</div>
+		<div class="score"> Truscore: {{result['truscore']['score']}}</div>
 	</div>	
-	<div class="rating-modal" id="rating-modal-{{result['establishment']}}">
-			<div class="close-btn" id="close-{{result['establishment']}}">X</div>
-			<div class="rating-title" id="rating-title-{{result['establishment']}}">{{result['establishment']}}
-			</div>			
-			<form class="rating-form" id="rating-form-{{result['establishment']}}">
-				<div class="form-section" id="section1">
-					<div class="form-body" id="question1">
-						<h3>How would you rate {{result['establishment']}} for quality (ignoring the cost)?
-						</h3>
-						<select id="rating-selector-{{result['establishment']}}" required>
-						  <option value=1>Awful</option>
-						  <option value=2>Bad</option>
-						  <option value=3>OK</option>
-						  <option value=4>Good</option>
-						  <option value=5>Excellent</option>
-						</select>
-					</div>
-					<div class="form-body" id="question2">
-						<h3>How would you rate {{result['establishment']}} for cost relative to similar places?
-						</h3>
-						<select id="rating-selector-{{result['establishment']}}" required>
-						  <option value=5>Very Cheap</option>
-						  <option value=4>Cheap</option>
-						  <option value=3>Average</option>
-						  <option value=2>Expensive</option>
-						  <option value=1>Very Expensive</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-section" id="section2">
-					<div class="form-body"id ="question3">
-						<h3> What were the 3 best things about {{result['establishment']}}? (optional)
-						<input type="text" id="best1">
-						<input type="text" id="best2">
-						<input type="text" id="best3">
-					</div>
-					<div class="form-body"id ="question4">
-						<h3> What were the 3 worst things about {{result['establishment']}}? (optional)
-						<input type="text" id="worst1">
-						<input type="text" id="worst2">
-						<input type="text" id="worst3">
-					</div>
-				</div>
-				<div class="form-section" id="section3">
-					<div class="form-body"id ="question5">
-						<h3> Any other comments about {{result['establishment']}}? (optional)
-						<textarea maxlength=200 id="comments">
-						</textarea>
-					</div>
-				</div>
-				<button class="btn submit-rating" id="rate-{{result['establishment']}}">Submit</button>
-			</form>		 
-	</div>
-
-
 {% endfor %}
 
-<div class ="btn new-review" id="btn new-review">Add Review</div>
-<div class="rating-modal" id="rating-modal-new">
-	<div class="close-btn" id="close-new">X</div>
-	<div class="rating-title" id="rating-title-new">Add New Review
-	</div>
-	<div class="rating-description" id="rating-description-new">
-		Tell us about this new place
-	</div>
-	<form class="rating-form" id="rating-form-new">
-		<h2>What was it called?</h2>
-		<input type="text" id="establishment-name">
-		<h3>How would you rate it out of 5</h3>
-		<select id="rating-selector-new">
-		  <option value=1>1</option>
-		  <option value=2>2</option>
-		  <option value=3>3</option>
-		  <option value=4>4</option>
-		  <option value=5>5</option>
-		</select>
-		<button class="btn submit-new-rating" id="rate-new">Submit</button>
-	</form>		 
+<a href="{{url_for('index')}}" class="btn no-results new-search" href="/search">
+	New Search
+</a>
+<div class="btn no-results new-review" id="btn-new-review">
+Add Review
 </div>
-<script src="../static/js/search.js?v=7"></script>
+<div class="modal" id="new-rating-modal"> 
+	<form method="POST" action="/addNewRating" method="post">
+	    {{ form.hidden_tag() }}   
+	    <div class="close-btn" id="close-new">X</div>
+	      <div class="form-group-1">
+	        {{ form.product_type.label(class='form-label') }}
+
+	        {{ form.product_type(class='form-select') }}
+	      </div>
+	      <div class="form-group-1">
+	        {{ form.product_title.label(class='form-label') }}
+
+	        {{ form.product_title(class='form-entry-field') }}
+	      </div>
+	      <div class="form-group-1">
+	        {{ form.rating.label(class='form-label') }}
+
+	        {{ form.rating(class='form-select') }}
+	      </div>
+	      <div class="btn next-screen" id="next-screen-btn">
+	      	Next
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.top_1.label(class='form-label') }}
+
+	        {{ form.top_1(class='form-entry-field', maxlength=100) }}
+	        {{ form.top_2(class='form-entry-field', maxlength=100) }}
+	        {{ form.top_3(class='form-entry-field', maxlength=100) }}
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.bottom_1.label(class='form-label') }}
+
+	        {{ form.bottom_1(class='form-entry-field', maxlength=100) }}
+	        {{ form.bottom_2(class='form-entry-field', maxlength=100) }}
+	        {{ form.bottom_3(class='form-entry-field', maxlength=100) }}
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.comments.label(class='form-label') }}
+
+	        {{ form.comments(class='form-textarea-field', maxlength=160) }}
+	      </div>
+
+
+	    {{ form.submit(class="btn submit") }}
+	</form> 
+</div>
 
 
 
@@ -106,20 +79,53 @@
 <a href="{{url_for('index')}}" class="btn no-results new-search" href="/search">
 	New Search
 </a>
-<div class="btn no-results new-review" id="btn new-review">
+<div class="btn no-results new-review" id="btn-new-review">
 Add Review
 </div>
 <div class="modal" id="new-rating-modal"> 
-	<form method="POST" action="/results" method="post">
+	<form method="POST" action="/addNewRating" method="post">
 	    {{ form.hidden_tag() }}   
-
-	      <div class="form-body">
+	    <div class="close-btn" id="close-new">X</div>
+	      <div class="form-group-1">
 	        {{ form.product_type.label(class='form-label') }}
 
 	        {{ form.product_type(class='form-select') }}
 	      </div>
+	      <div class="form-group-1">
+	        {{ form.product_title.label(class='form-label') }}
 
-	    {{ form.next_screen(class="btn next") }}
+	        {{ form.product_title(class='form-entry-field') }}
+	      </div>
+	      <div class="form-group-1">
+	        {{ form.rating.label(class='form-label') }}
+
+	        {{ form.rating(class='form-select') }}
+	      </div>
+	      <div class="btn next-screen" id="next-screen-btn">
+	      	Next
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.top_1.label(class='form-label') }}
+
+	        {{ form.top_1(class='form-entry-field', maxlength=100) }}
+	        {{ form.top_2(class='form-entry-field', maxlength=100) }}
+	        {{ form.top_3(class='form-entry-field', maxlength=100) }}
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.bottom_1.label(class='form-label') }}
+
+	        {{ form.bottom_1(class='form-entry-field', maxlength=100) }}
+	        {{ form.bottom_2(class='form-entry-field', maxlength=100) }}
+	        {{ form.bottom_3(class='form-entry-field', maxlength=100) }}
+	      </div>
+	      <div class="form-group-2">
+	        {{ form.comments.label(class='form-label') }}
+
+	        {{ form.comments(class='form-textarea-field', maxlength=160) }}
+	      </div>
+
+
+	    {{ form.submit(class="btn submit") }}
 	</form> 
 </div>
 <script src="../static/js/search.js?v=7"></script>

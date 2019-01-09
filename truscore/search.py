@@ -3,12 +3,24 @@ from datetime import date
 from .models import Vote
 from truscore import app, es
 
+class MoreInfo():
+	def returnMoreInfo(product):
+		more_info = {
+		"trend": {"current": 22, "1w": 24, "1m": 26, "3m":26, "6m": 26, "1y": 30, "2y": 45},
+		"recent votes": {"John Doe(987)": "1*", "Migulito(13)": "5*", "Pavel13": "2*"},
+		"best bits": {"Beach": 9, "Pool":7, "Staff":3},
+		"worst bits": {"Food": 28, "Staff": 14, "cleanliness": 10},
+		"comments": 
+			[{"name": "John Doe", "user reliability": 85, "date": "November 15th 2018", "comment": "Don't go here if you want to drink beer. Food also inedible."}]
+		}
+		return more_info
 
 
 class Results():
 
 	def elasicSearchResults(query):
-		esJSON = es.search(index='establishments', doc_type='establishment', body={'query': {'match': {'text': query}}})
+		esJSON = es.search(index='products', doc_type='establishment', body={'query': {'match': {'text': query}}})
+		print(esJSON)
 		return esJSON['hits']
 
 
@@ -20,14 +32,15 @@ class Results():
 			return Results.returnData(votes)
 		else:
 			results_data = Results.elasicSearchResults(query)
-			if results_data['total'] == 0:
+			number_of_hits = results_data['total']
+			if number_of_hits == 0:
 				return []
 			else:
 				returned_establishments = results_data['hits']
-				print("printing all returned results", returned_establishments)
-				first_hit = returned_establishments[0]
-				place =first_hit['_source']['text']
-				votes = Vote.query.filter_by(establishment=place)
+				place_names = []
+				for place in returned_establishments:
+					place_names.append(place['_source']['text'])
+				votes = Vote.query.filter(Vote.product_name.in_(place_names)).all()
 				return Results.returnData(votes)
 		
 	def returnData(votes):
@@ -35,7 +48,7 @@ class Results():
 		results = []
 		establishments = set()
 		for vote in votes:
-			establishments.add(vote.establishment)
+			establishments.add(vote.product_name)
 		for establishment_name in establishments:
 			resultData = {}
 			resultData['establishment'] = establishment_name
@@ -51,7 +64,7 @@ class Truscore():
 		number_of_votes = 0
 		users_and_weights = Truscore.calculateUserWeightings(votes)	
 		for vote in votes:
-			if vote.establishment == establishment_name:
+			if vote.product_name == establishment_name:
 				number_of_votes += 1
 				vote_weight = DateWeight.calculateDateWeighting(vote) * users_and_weights[vote.username]
 				vote_dict = {}

@@ -100,8 +100,8 @@ function addMoreInfoContainer(idName) {
 
 function addMoreInfoListeners() {
 	document.addEventListener('click', function (event) {
-		if (event.target.matches('.more-info')) {
-			let id = event.target.id[11];
+		if (event.target.matches('.result')) {
+			let id = event.target.id;
 			getMoreInfo(id)
 		}
 
@@ -184,6 +184,7 @@ function addNextScreenListener() {
 
 	}, false)};
 
+//this should obvs one single listener innit
 addNewReviewListener();
 addMoreInfoListeners();
 addRateListeners();
