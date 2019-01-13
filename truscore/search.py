@@ -5,6 +5,31 @@ from truscore import app, es
 
 class MoreInfo():
 	def returnMoreInfo(product):
+		votes = Vote.query.filter_by(product_name=product).all()
+		best_bits = []
+		worst_bits = []
+		comments = []
+		for vote in votes:
+			best_bits.append(vote.product_top_1)
+			best_bits.append(vote.product_top_2)
+			best_bits.append(vote.product_top_3)
+			worst_bits.append(vote.product_bottom_1)
+			worst_bits.append(vote.product_bottom_2)
+			worst_bits.append(vote.product_bottom_3)
+			comments.append(vote.comments)
+		MoreInfo.removeEmptyEntries(best_bits)
+		MoreInfo.removeEmptyEntries(worst_bits)
+		MoreInfo.removeEmptyEntries(comments)
+		data = {'best bits': best_bits, 'worst bits': worst_bits, 'comments': comments}
+		print(data)
+		return data
+
+	def removeEmptyEntries(lst):
+		for entry in lst:
+			if entry == '':
+				lst.remove(entry)
+
+
 		more_info = {
 		"trend": {"current": 22, "1w": 24, "1m": 26, "3m":26, "6m": 26, "1y": 30, "2y": 45},
 		"recent votes": {"John Doe(987)": "1*", "Migulito(13)": "5*", "Pavel13": "2*"},

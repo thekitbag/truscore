@@ -69,6 +69,7 @@
     bottom: 4%;
     background-color: pink;
     border: 2px solid black;
+    z-index: 1;
 }
 .form-group-1 {
     display: block;
