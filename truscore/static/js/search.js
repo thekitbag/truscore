@@ -29,9 +29,15 @@ function sendRating(score, establishment) {
 }
 
 function populateMoreInfo(product, json) {
-	let modal = document.getElementById(product+"-more-info-modal")
-	console.log(json);
-	modal.innerHTML = json['best bits'];
+	let modal = document.getElementById(product+"-more-info-modal");
+	let info_categories = ["best bits", "worst bits", "comments"]
+	for (let i = 0; i < info_categories.length; i++){
+		let container = document.createElement("div");
+		container.setAttribute("class", "modal-container");
+		container.setAttribute("id", "modal-container-"+info_categories[i]);
+		modal.appendChild(container);
+		container.innerHTML = json[info_categories[i]];
+	}
 
 }
 
