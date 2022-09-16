@@ -18,7 +18,7 @@ greenlet==0.4.15
 gunicorn==19.9.0
 itsdangerous==1.1.0
 Jinja2==2.10
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 pony==0.7.6
 ponywhoosh==1.7.8
